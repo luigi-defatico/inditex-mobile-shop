@@ -44,3 +44,19 @@ src/
   styles/        Global styles and CSS variables
   test/          Test setup and utilities
 ```
+
+## API
+
+Base URL: `https://itx-frontend-test.onrender.com`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/product` | Fetch all products |
+| GET | `/api/product/:id` | Fetch product detail |
+| POST | `/api/cart` | Add product to cart |
+
+## Notes
+
+- API responses are cached client-side with a 1-hour TTL
+- Cart count is persisted in localStorage and restored on page load
+- Search filters products in real time by brand and model
