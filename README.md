@@ -25,10 +25,22 @@ npm install
 
 ## Tech Stack
 
-- React 18 + Vite
-- React Router v6
+- React 19 + Vite
+- React Router v7
 - Vitest + React Testing Library
 - CSS Modules
 - ESLint + Prettier
 
 ## Project Structure
+
+```
+src/
+  api/           API client and cache layer
+  components/    Shared UI components
+  pages/         Application views (PLP, PDP)
+  hooks/         Custom React hooks
+  context/       Global state providers
+  utils/         Helper functions
+  styles/        Global styles and CSS variables
+  test/          Test setup and utilities
+```
