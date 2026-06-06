@@ -15,20 +15,20 @@ function PDP() {
   const [adding, setAdding] = useState(false)
   const [feedback, setFeedback] = useState(null)
 
-  // Pre-select first option when product loads
-  if (product && selectedColor === null && product.options?.colors?.length) {
-    setSelectedColor(product.options.colors[0].code)
-  }
-  if (product && selectedStorage === null && product.options?.storages?.length) {
-    setSelectedStorage(product.options.storages[0].code)
-  }
+  // Derive effective selection: use user choice or fall back to first available option
+  const effectiveColor = selectedColor ?? product?.options?.colors?.[0]?.code ?? null
+  const effectiveStorage = selectedStorage ?? product?.options?.storages?.[0]?.code ?? null
 
   async function handleAddToCart() {
-    if (selectedColor === null || selectedStorage === null) return
+    if (effectiveColor === null || effectiveStorage === null) return
     setAdding(true)
     setFeedback(null)
     try {
-      const result = await addToCart({ id, colorCode: selectedColor, storageCode: selectedStorage })
+      const result = await addToCart({
+        id,
+        colorCode: effectiveColor,
+        storageCode: effectiveStorage,
+      })
       setCartCount(result.count)
       setFeedback('Added to cart!')
     } catch {
@@ -95,9 +95,9 @@ function PDP() {
                 {product.options?.storages?.map((s) => (
                   <button
                     key={s.code}
-                    className={`${styles.option} ${selectedStorage === s.code ? styles.optionSelected : ''}`}
+                    className={`${styles.option} ${effectiveStorage === s.code ? styles.optionSelected : ''}`}
                     onClick={() => setSelectedStorage(s.code)}
-                    aria-pressed={selectedStorage === s.code}
+                    aria-pressed={effectiveStorage === s.code}
                   >
                     {s.name}
                   </button>
@@ -111,9 +111,9 @@ function PDP() {
                 {product.options?.colors?.map((c) => (
                   <button
                     key={c.code}
-                    className={`${styles.option} ${selectedColor === c.code ? styles.optionSelected : ''}`}
+                    className={`${styles.option} ${effectiveColor === c.code ? styles.optionSelected : ''}`}
                     onClick={() => setSelectedColor(c.code)}
-                    aria-pressed={selectedColor === c.code}
+                    aria-pressed={effectiveColor === c.code}
                   >
                     {c.name}
                   </button>
