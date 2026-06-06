@@ -168,3 +168,9 @@
   padding: var(--spacing-xl);
   color: var(--color-text-light);
 }
+
+.noOptions {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  font-style: italic;
+}

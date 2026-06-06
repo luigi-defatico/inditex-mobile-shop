@@ -97,32 +97,40 @@ function PDP() {
             <div className={styles.selectorGroup}>
               <label className={styles.selectorLabel}>Storage</label>
               <div className={styles.options}>
-                {product.options?.storages?.map((s) => (
-                  <button
-                    key={s.code}
-                    className={`${styles.option} ${effectiveStorage === s.code ? styles.optionSelected : ''}`}
-                    onClick={() => setSelectedStorage(s.code)}
-                    aria-pressed={effectiveStorage === s.code}
-                  >
-                    {s.name}
-                  </button>
-                ))}
+                {product.options?.storages?.length > 0 ? (
+                  product.options.storages.map((s) => (
+                    <button
+                      key={s.code}
+                      className={`${styles.option} ${effectiveStorage === s.code ? styles.optionSelected : ''}`}
+                      onClick={() => setSelectedStorage(s.code)}
+                      aria-pressed={effectiveStorage === s.code}
+                    >
+                      {s.name?.trim() || 'N/A'}
+                    </button>
+                  ))
+                ) : (
+                  <span className={styles.noOptions}>Not available</span>
+                )}
               </div>
             </div>
 
             <div className={styles.selectorGroup}>
               <label className={styles.selectorLabel}>Color</label>
               <div className={styles.options}>
-                {product.options?.colors?.map((c) => (
-                  <button
-                    key={c.code}
-                    className={`${styles.option} ${effectiveColor === c.code ? styles.optionSelected : ''}`}
-                    onClick={() => setSelectedColor(c.code)}
-                    aria-pressed={effectiveColor === c.code}
-                  >
-                    {c.name}
-                  </button>
-                ))}
+                {product.options?.colors?.length > 0 ? (
+                  product.options.colors.map((c) => (
+                    <button
+                      key={c.code}
+                      className={`${styles.option} ${effectiveColor === c.code ? styles.optionSelected : ''}`}
+                      onClick={() => setSelectedColor(c.code)}
+                      aria-pressed={effectiveColor === c.code}
+                    >
+                      {c.name?.trim() || 'N/A'}
+                    </button>
+                  ))
+                ) : (
+                  <span className={styles.noOptions}>Not available</span>
+                )}
               </div>
             </div>
 
