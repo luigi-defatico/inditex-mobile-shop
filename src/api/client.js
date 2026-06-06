@@ -8,7 +8,9 @@ import { API_BASE_URL } from './config'
 export async function get(path) {
   const response = await fetch(`${API_BASE_URL}${path}`)
   if (!response.ok) {
-    throw new Error(`GET ${path} failed with status ${response.status}`)
+    const error = new Error(`GET ${path} failed with status ${response.status}`)
+    console.error(error)
+    throw error
   }
   return response.json()
 }
@@ -26,7 +28,9 @@ export async function post(path, body) {
     body: JSON.stringify(body),
   })
   if (!response.ok) {
-    throw new Error(`POST ${path} failed with status ${response.status}`)
+    const error = new Error(`POST ${path} failed with status ${response.status}`)
+    console.error(error)
+    throw error
   }
   return response.json()
 }

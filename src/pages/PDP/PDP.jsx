@@ -7,7 +7,7 @@ import styles from './PDP.module.css'
 
 function PDP() {
   const { id } = useParams()
-  const { product, status, error } = useProduct(id)
+  const { product, status } = useProduct(id)
   const { setCartCount } = useCart()
 
   const [selectedColor, setSelectedColor] = useState(null)
@@ -43,7 +43,12 @@ function PDP() {
   }
 
   if (status === 'error') {
-    return <div className={styles.state}><p>Failed to load product: {error}</p></div>
+    return (
+      <div className={styles.state}>
+        <p>Product not found or unavailable.</p>
+        <Link to="/" className={styles.back}>Back to products</Link>
+      </div>
+    )
   }
 
   if (!product) return null
