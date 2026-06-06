@@ -7,7 +7,7 @@ import ProductCard from '../../components/ProductCard/ProductCard'
 import styles from './PLP.module.css'
 
 function PLP() {
-  const { products, status, error } = useProducts()
+  const { products, status } = useProducts()
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query, 300)
   const filtered = filterProducts(products, debouncedQuery)
@@ -17,7 +17,7 @@ function PLP() {
   }
 
   if (status === 'error') {
-    return <div className={styles.state}><p>Failed to load products: {error}</p></div>
+    return <div className={styles.state}><p>Failed to load products. Please try again later.</p></div>
   }
 
   return (
